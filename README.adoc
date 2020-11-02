@@ -1,0 +1,27 @@
+== What is this app?
+
+This is an example of a toy Spring Cloud Stream processing system using Kafka Streams aggregation support.
+
+The application simply aggregates events using an object attribute.
+
+The application demonstrates adding a micrometer support with Prometheus and NewRelic registries.
+
+=== Running the app:
+
+- Go to the root of the repository and do:
+
+    docker-compose up -d
+
+- Go to the `event-producer` folder and start sending events to kafka:
+
+    mvn spring-boot:run
+
+- Export `INSIGHTS_INSERT_KEY` environmental variable for NewRelic registry
+
+- Go to the `event-aggregator` folder and start aggregating events:
+
+    mvn spring-boot:run
+
+
+Then go to the URL: http://localhost:8080/count
+

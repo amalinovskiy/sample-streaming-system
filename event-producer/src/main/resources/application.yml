@@ -1,0 +1,13 @@
+spring.application.name: event-producer
+
+spring.cloud:
+  stream:
+    function:
+      definition: produce
+    bindings:
+      produce-out-0.destination: INPUT_TOPIC
+
+management:
+  endpoints.web:
+    base-path: /manage
+    exposure.include: metrics,prometheus

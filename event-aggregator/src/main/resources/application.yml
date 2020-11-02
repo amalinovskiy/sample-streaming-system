@@ -1,0 +1,24 @@
+spring.application.name: event-aggregator
+
+spring.cloud:
+  function.definition: countByEventType;countEvents
+  stream:
+    kafka.streams:
+      bindings:
+        countByEventType-in-0.consumer.application-id: event-aggregator
+        countEvents-in-0.consumer.application-id: event-counter
+      binder.configuration:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+        commit.interval.ms: 1000
+    bindings:
+      countByEventType-in-0.destination: INPUT_TOPIC
+      countByEventType-out-0.destination: OUTPUT_TOPIC
+      countEvents-in-0.destination: INPUT_TOPIC
+
+spring.kafka.streams.properties.spring.json.value.default.type: com.ocado.presentation.streaming.aggregator.DomainEvent
+
+management:
+  endpoints.web:
+    base-path: /manage
+    exposure.include: metrics,prometheus
